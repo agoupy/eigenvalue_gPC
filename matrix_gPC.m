@@ -4,7 +4,7 @@ function [K]=matrix_gPC(L,dim)
 
 
 %% Create quadrature
-addpath('/home/goupy/Téléchargements/TasmanianSparseGrids/InterfaceMATLAB/');
+addpath('/InterfaceMATLAB/');
 domain = repmat([ 0, 1/2],[dim,1]);                                         % used to have exp(-x^2/2) for prob and exp(-x^2) for phys
 [ weights, points ] = tsgMakeQuadrature( dim,'gauss-hermite','qptotal',L,0,domain,0);
 weights=weights./((2*pi)^(dim/2));                                          % normalization pi for phys 2*pi for prob

@@ -1,4 +1,5 @@
 function [M]=matrix_eval(points)
+% Evaluate the matrix at the quadrature points
 
 dim=size(points,2);
 Nq=size(points,1);
