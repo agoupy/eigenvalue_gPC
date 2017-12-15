@@ -57,6 +57,9 @@ for i_ev=1:n
     else
         disp(['Zero reached in ' num2str(iter) ' iterations'])
     end
+    
+    ev{i_ev}=X(1:P,1)';
+    ef{i_ev}=reshape(X((P+1):end,1),n,P);
 end
 end
 
