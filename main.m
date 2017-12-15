@@ -18,13 +18,20 @@ P=size(alpha,1);                                                            % nu
 
 n=size(K{1},1);
 
-B=cell(L,1);
-Gamma=cell(L,1);
+B=cell(P,1);
+Gamma=cell(P,1);
 
 for i=1:L
     B{i}=kron(eye(P),K{i});
     Gamma{i}=construct_gamma(dim,order_gPC_eigen,n,i);
 end
 
+% Complete with null matrices /!\ P has to be greater than L
+for i=L+1:P
+    B{i}=zeros(n*P);
+    Gamma{i}=zeros(n*P);
+end
+
 %% Find coefficients with Newton-Raphson approach
 
+[ev,ef]=newton_raphson(B,Gamma,K{1});
