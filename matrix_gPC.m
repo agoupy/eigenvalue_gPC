@@ -4,9 +4,9 @@ function [K]=matrix_gPC(L,dim)
 
 
 %% Create quadrature
-addpath('/InterfaceMATLAB/');
+addpath('~/eigenvalue_gPC/InterfaceMATLAB/');
 domain = repmat([ 0, 1/2],[dim,1]);                                         % used to have exp(-x^2/2) for prob and exp(-x^2) for phys
-[ weights, points ] = tsgMakeQuadrature( dim,'gauss-hermite','qptotal',L,0,domain,0);
+[ weights, points ] = tsgMakeQuadrature( dim,'gauss-hermite','qptotal',dim*L,0,domain,0);
 weights=weights./((2*pi)^(dim/2));                                          % normalization pi for phys 2*pi for prob
 Nq=size(points,1);
 
@@ -16,8 +16,8 @@ M=matrix_eval(points);
 %% Compute gPC coefficients
 %generate the hermite polynomials
 alpha=multi_index(dim,L);
-He=poly1D(L,'hermite-prob');                                                % Hermite polynomials of degree 1
 P=size(alpha,1);                                                            % number of polynomials
+He=poly1D(L,'hermite-prob');                                                % Hermite polynomials of degree 1
 
 %compute the coefficients
 K=cell(P,1);

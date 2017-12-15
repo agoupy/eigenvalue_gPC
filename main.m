@@ -6,11 +6,25 @@
 %% gPC decomposition of the matrix
 % The random matrix has to be defined in matrix_eval
 
-L=4;                        % gPC order for matrix decomposition
-dim=2;                      % number of random parameter
-K=matrix_gPC(L,dim);
+order_gPC_matrix=3;                                                         % gPC order for matrix decomposition
+dim=2;                                                                      % number of random parameter
+K=matrix_gPC(order_gPC_matrix,dim);
+L=size(K,1);
 
 %% Construction of relevant matrices B and Gamma
+order_gPC_eigen=4;
+alpha=multi_index(dim,order_gPC_eigen);
+P=size(alpha,1);                                                            % number of polynomials
 
+n=size(K{1},1);
+
+B=cell(L,1);
+Gamma=cell(L,1);
+
+for i=1:L
+    B{i}=kron(eye(P),K{i});
+    Gamma{i}=construct_gamma(dim,order_gPC_eigen,n,i);
+end
 
 %% Find coefficients with Newton-Raphson approach
+
