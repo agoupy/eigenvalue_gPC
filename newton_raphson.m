@@ -42,7 +42,7 @@ for i_ev=1:n
     
     F=func_eval(X,B,Gamma);
     J=jacob(X,B,expectation);
-    tol=1e-6;
+    tol=1e-9;
     iter=0;
     
     while (max(abs(F))>tol) && (iter<1000)
@@ -51,6 +51,7 @@ for i_ev=1:n
         J=jacob(X,B,expectation);
         iter=iter+1;
     end
+    disp(num2str(max(abs(F))))
     
     if iter==1000
         disp('Max iteration reached ! /!\ NR not converged')
@@ -82,7 +83,7 @@ end
 F(1:n*P,1)=AA*phi;
 
 for kk=1:P
-    F(n*P+kk,1)=phi'*Gamma{kk}*phi-1*(kk==1);
+    F(n*P+kk,1)=phi'*Gamma{kk}*phi-(kk==1);
 end
 
 end

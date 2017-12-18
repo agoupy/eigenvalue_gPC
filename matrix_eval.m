@@ -1,15 +1,14 @@
 function [M]=matrix_eval(points)
 % Evaluate the matrix at the quadrature points
 
-dim=size(points,2);
 Nq=size(points,1);
 M=cell(Nq,1);
-C=[2 3 4; 5 8 2; 7 5 3];
-A=[0 1 0; 0 0 1; 1 0 0];
-B=[1 0 0; 1 0 0; 0 0 1];
+C=[2 5 -8; 0 8 3; 0 0 -5];
+A=[1 0 0; 0 0 0; 0 0 1];
+B=[0 0 0; 0 1 0; 0 0 0];
 
 for i=1:Nq
-    M{i}=A.*points(i,1)+B.*points(i,2)+C;
+    M{i}=C+A.*points(i,1)+B.*points(i,2).*points(i,1);
 end
 
 end
