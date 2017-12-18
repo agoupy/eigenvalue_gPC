@@ -12,7 +12,7 @@ K=matrix_gPC(order_gPC_matrix,dim);
 L=size(K,1);
 
 %% Construction of relevant matrices B and Gamma
-order_gPC_eigen=3;
+order_gPC_eigen=5;
 alpha=multi_index(dim,order_gPC_eigen);
 P=size(alpha,1);                                                            % number of polynomials
 
@@ -38,11 +38,27 @@ end
 
 return;
 %% Evaluate gPC convergence with quasi Monte-Carlo comparison
-N_QMC=500;
+N_QMC=10000;
 points=Sobol_quasi_random(N_QMC,dim);
 ev_QMC=zeros(3,N_QMC);
 M=matrix_eval(points);
 
 for i_QMC=1:N_QMC
     ev_QMC(:,i_QMC)=eig(M{i_QMC})';
+end
+
+% Mean
+ev_mean_QMC=zeros(3,1);
+ev_mean_QMC=mean(ev_QMC,2);
+ev_mean_gPC=zeros(3,1);
+for i=1:3
+    ev_mean_gPC(i,1)=ev{i}(1,1);
+end
+
+% Variance
+ev_var_QMC=zeros(3,1);
+ev_var_QMC=var(ev_QMC,0,2);
+ev_var_gPC=zeros(3,1);
+for i=1:3
+    ev_var_gPC(i,1)=sum(abs(ev{i}(1,2:end).^2));
 end
