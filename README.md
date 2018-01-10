@@ -1,4 +1,4 @@
-# eigenvalue_gPC
+# eigenvalue_gPC #
 
 MATLAB program implementing the method described in:
 

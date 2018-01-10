@@ -6,13 +6,13 @@
 %% gPC decomposition of the matrix
 % The random matrix has to be defined in matrix_eval
 
-order_gPC_matrix=3;                                                         % gPC order for matrix decomposition
+order_gPC_matrix=4;                                                         % gPC order for matrix decomposition
 dim=2;                                                                      % number of random parameter
 K=matrix_gPC(order_gPC_matrix,dim);
 L=size(K,1);
 
 %% Construction of relevant matrices B and Gamma
-order_gPC_eigen=5;
+order_gPC_eigen=6;
 alpha=multi_index(dim,order_gPC_eigen);
 P=size(alpha,1);                                                            % number of polynomials
 
@@ -36,11 +36,11 @@ end
 
 [ev,ef]=newton_raphson(B,Gamma,K{1});
 
-return;
+
 %% Evaluate gPC convergence with quasi Monte-Carlo comparison
 N_QMC=10000;
 points=Sobol_quasi_random(N_QMC,dim);
-ev_QMC=zeros(3,N_QMC);
+ev_QMC=zeros(n,N_QMC);
 M=matrix_eval(points);
 
 for i_QMC=1:N_QMC
@@ -48,17 +48,17 @@ for i_QMC=1:N_QMC
 end
 
 % Mean
-ev_mean_QMC=zeros(3,1);
 ev_mean_QMC=mean(ev_QMC,2);
-ev_mean_gPC=zeros(3,1);
-for i=1:3
+ev_mean_gPC=zeros(n,1);
+for i=1:n
     ev_mean_gPC(i,1)=ev{i}(1,1);
 end
 
 % Variance
-ev_var_QMC=zeros(3,1);
 ev_var_QMC=var(ev_QMC,0,2);
-ev_var_gPC=zeros(3,1);
-for i=1:3
+ev_var_gPC=zeros(n,1);
+for i=1:n
     ev_var_gPC(i,1)=sum(abs(ev{i}(1,2:end).^2));
 end
+
+display_result(ev_mean_gPC,ev_mean_QMC,ev_var_QMC,ev_var_gPC);
