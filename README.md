@@ -11,8 +11,8 @@ by Roger Ghanem and Debraj Ghosh
 
 The file `main.m` will execute the code for the random matrix defined in `matrix_eval.m`.
 
-The matrix M depends on two stochastic parameters ![f1] and ![f2]:
-``![f3]``
+The matrix M depends on two stochastic parameters ![f1] and ![f2]: ![f3] 
+
 The code will compute the gPC coefficients of eigenvalues (ev) and eigenvectors (ef) and return the mean and variance for the eigenvalues (computed with the gPC and quasi Monte-Carlo for comparison).
 
 ## Files
@@ -33,5 +33,5 @@ The code will compute the gPC coefficients of eigenvalues (ev) and eigenvectors 
 
 [f1]: http://chart.apis.google.com/chart?cht=tx&chl=\xi_1
 [f2]: http://chart.apis.google.com/chart?cht=tx&chl=\xi_2
-[f3]: http://chart.apis.google.com/chart?cht=tx&chl=M=C+A*\xi_1+B*xi_2
+[f3]: http://chart.apis.google.com/chart?cht=tx&chl=M=C%2BA*\xi_1%2BB*\xi_2
 [f4]: http://chart.apis.google.com/chart?cht=tx&chl=\Gamma
